@@ -10,19 +10,19 @@ if($method == 'POST'){
 
 	switch ($kata) {
 		case 'hi':
-			$speech = "Hi, Nice to meet you";
+			$agent->reply('Hi, how can I help?');
 			break;
 
 		case 'bye':
-			$speech = "Bye, good night";
+			$speech = "dada";
 			break;
 
 		case 'anything':
-			$speech = "Yes, you can type anything here.";
+			$speech = "ngetik apa kamu";
 			break;
 		
 		default:
-			$speech = "Sorry, I didnt get that. Please ask me something else.";
+			$speech = "input tidak terdaftar";
 			break;
 	}
 
