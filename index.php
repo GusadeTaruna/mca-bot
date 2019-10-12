@@ -20,7 +20,7 @@ if($method == "POST"){
 			break;
 		
 		default:
-			$speech = "Maaf inputan tidak dikenali";
+			$speech = "Maaf inputan tidak dikenali"
 			break;
 	}
 
