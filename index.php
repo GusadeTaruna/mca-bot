@@ -15,12 +15,12 @@ if($method == 'POST'){
     	$balasan = "Selamat datang di Naybot!
     				Ada yang bisa aku bantu ?
     				(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
+	}elseif(in_array($kata, $perintah)){
+		$balasan = "1. booking (Untuk pesan resource) 2. lihatresource (Untuk melihat ketersediaan resource) ";
 	}
 
 	//Respon untuk lihat perintah
-	if(in_array($kata, $perintah)){
-		$balasan = "1. booking (Untuk pesan resource) 2. lihatresource (Untuk melihat ketersediaan resource) ";
-	}
+	
 
 	// switch ($kata) {
 	// 	case 'hi':
