@@ -11,17 +11,17 @@ if($method == 'POST'){
 	$list = $json->queryResult->parameters->list;
 
 	if (in_array($kata, $welcome)) {
-    	$balasan = "Selamat datang di Naybot!
+    	$balasanKata = "Selamat datang di Naybot!
     				Ada yang bisa aku bantu ?
     				(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
 	}else{
-		$balasan = "input tidak terdaftar";
+		$balasanKata = "input tidak terdaftar";
 	}
 
 	if (in_array($list, $perintah)) {
-    	$balasan = "ini list perintah" ;
+    	$balasanPerintah = "ini list perintah" ;
 	}else{
-		$balasan = "input tidak terdaftar";
+		$balasanPerintah = "input tidak terdaftar";
 	}
 
 	// switch ($kata) {
@@ -43,7 +43,8 @@ if($method == 'POST'){
 	// }
 
 	$response = new \stdClass();
-	$response->fulfillmentText = $balasan;
+	$response->fulfillmentText = $balasanKata;
+	$response->fulfillmentText = $balasanPerintah;
 	$response->source = "webhook";
 	echo json_encode($response);
 }
