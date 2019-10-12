@@ -46,7 +46,7 @@ if($method == 'POST'){
 	}elseif (in_array($kata, $perintah)) {
 		$response->fulfillmentText = $responPerintah;
 	}else{
-		$response->fulfillmentText = print_r($salah[array_rand($salah)]);
+		$response->fulfillmentText = "Inputanmu tidak dapat dikenali, Silahkan jalankan perintah listperintah untuk melihat perintah yang tersedia";
 	}
 	$response->source = "webhook";
 	echo json_encode($response);
