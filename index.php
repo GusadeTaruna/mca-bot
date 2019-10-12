@@ -13,16 +13,14 @@ if($method == 'POST'){
     	$balasan = "Selamat datang di Naybot!
     				Ada yang bisa aku bantu ?
     				(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
-    	if (in_array($kata, $perintah)) {
+	}else{
+		$balasan = "input tidak terdaftar";
+	}
+	if (in_array($kata, $perintah)) {
     		$balasan = "ini list perintah" ;
 		}else{
 			$balasan = "input tidak terdaftar";
 		}
-
-
-	}else{
-		$balasan = "input tidak terdaftar";
-	}
 
 	// switch ($kata) {
 	// 	case 'hi':
