@@ -1,8 +1,8 @@
-<?php
-	
+<?php 
+
 $method = $_SERVER['REQUEST_METHOD'];
 
-if($method == "POST"){
+if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
 
@@ -10,33 +10,31 @@ if($method == "POST"){
 
 	switch ($text) {
 		case 'hi':
-			$speech = "Hi, salam kenal!";
+			$speech = "Hi, Nice to meet you";
 			break;
+
 		case 'bye':
-			$speech = "Terima kasih !";
+			$speech = "Bye, good night";
 			break;
+
 		case 'anything':
-			$speech = "coba ketik semua";
+			$speech = "Yes, you can type anything here.";
 			break;
 		
 		default:
-			$speech = "Maaf inputan tidak dikenali"
+			$speech = "Sorry, I didnt get that. Please ask me something else.";
 			break;
 	}
 
 	$response = new \stdClass();
-	$response->speech= "";
-	$response->displayText= "";
-	$response->source= "webhook";
+	$response->speech = $speech;
+	$response->displayText = $speech;
+	$response->source = "webhook";
 	echo json_encode($response);
-
-
-
 }
 else
 {
-	echo "Method tidak diijinkan";
+	echo "Method not allowed";
 }
-
 
 ?>
