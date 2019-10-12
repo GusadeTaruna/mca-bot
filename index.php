@@ -10,8 +10,9 @@ if($method == 'POST'){
 	$kata = $json->queryResult->parameters->kata;
 
 	if (in_array($kata, $welcome)) {
-    	$balasan = "Selamat datang di Naybot!\n
-    				Ada yang bisa aku bantu ? \r\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
+    	$balasan = "Selamat datang di Naybot!
+    				Ada yang bisa aku bantu ?
+    				(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
 	}else{
 		$balasan = "input tidak terdaftar";
 	}
