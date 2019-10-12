@@ -11,7 +11,7 @@ if($method == 'POST'){
 
 	if (in_array($kata, $welcome)) {
     	$balasan = "Selamat datang di Naybot!\n
-    				Ada yang bisa aku bantu ?";
+    				Ada yang bisa aku bantu ? \r\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
 	}else{
 		$balasan = "input tidak terdaftar";
 	}
