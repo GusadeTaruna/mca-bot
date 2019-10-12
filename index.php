@@ -16,12 +16,6 @@ if($method == 'POST'){
 	}else{
 		$balasan = "input tidak terdaftar";
 	}
-	if (in_array($kata, $perintah)) {
-    		$balasan = "ini list perintah" ;
-		}else{
-			$balasan = "input tidak terdaftar";
-		}
-
 	// switch ($kata) {
 	// 	case 'hi':
 	// 		$speech = "awaw";
