@@ -10,9 +10,10 @@ if($method == 'POST'){
 	$kata = $json->queryResult->parameters->kata;
 
 	if (in_array($kata, $welcome)) {
-    	$speech = "awaw";
+    	$balasan = "Selamat datang di Naybot!\n
+    				Ada yang bisa aku bantu ?";
 	}else{
-		$speech = "input tidak terdaftar";
+		$balasan = "input tidak terdaftar";
 	}
 
 	// switch ($kata) {
@@ -34,7 +35,7 @@ if($method == 'POST'){
 	// }
 
 	$response = new \stdClass();
-	$response->fulfillmentText = $speech;
+	$response->fulfillmentText = $balasan;
 	$response->source = "webhook";
 	echo json_encode($response);
 }
