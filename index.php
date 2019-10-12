@@ -7,20 +7,21 @@ if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
 
+	//ambil parameter kata dari dialogflow
 	$kata = $json->queryResult->parameters->kata;
 
+	//Respon untuk percakapan awal
 	if (in_array($kata, $welcome)) {
     	$balasan = "Selamat datang di Naybot!
     				Ada yang bisa aku bantu ?
     				(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
-	}else{
-		$balasan = "input tidak terdaftar";
 	}
+
+	//Respon untuk lihat perintah
 	if(in_array($kata, $perintah)){
-		$responPerintah = "wow mau";
-	}else{
-		$responPerintah = "gak mau";
+		$balasan = "1. booking (Untuk pesan resource) 2. lihatresource (Untuk melihat ketersediaan resource) ";
 	}
+
 	// switch ($kata) {
 	// 	case 'hi':
 	// 		$speech = "awaw";
@@ -44,6 +45,8 @@ if($method == 'POST'){
 		$response->fulfillmentText = $balasan;
 	}elseif (in_array($kata, $perintah)) {
 		$response->fulfillmentText = $responPerintah;
+	}else{
+		$response->fulfillmentText = $salah;
 	}
 	$response->source = "webhook";
 	echo json_encode($response);
