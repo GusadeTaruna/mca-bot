@@ -16,6 +16,11 @@ if($method == 'POST'){
 	}else{
 		$balasan = "input tidak terdaftar";
 	}
+	if(in_array($kata, $welcome)){
+		$balasan = "wow mau";
+	}else{
+		$balasan = "gak mau";
+	}
 	// switch ($kata) {
 	// 	case 'hi':
 	// 		$speech = "awaw";
