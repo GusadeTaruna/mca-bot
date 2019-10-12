@@ -6,7 +6,7 @@ if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
 
-	$welcome = array("hai","halo");
+	$welcome = array("hai","mmm");
 
 	$kata = $json->queryResult->parameters->kata;
 
