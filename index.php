@@ -9,17 +9,17 @@ if($method == 'POST'){
 
 	$kata = $json->queryResult->parameters->kata;
 
-	if (in_array($kata, $perintah)) {
+	if (in_array($kata, $welcome)) {
     	$balasan = "Selamat datang di Naybot!
     				Ada yang bisa aku bantu ?
     				(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
 	}else{
 		$balasan = "input tidak terdaftar";
 	}
-	if(in_array($kata, $welcome)){
-		$balasan = "wow mau";
+	if(in_array($kata, $perintah)){
+		$responPerintah = "wow mau";
 	}else{
-		$balasan = "gak mau";
+		$responPerintah = "gak mau";
 	}
 	// switch ($kata) {
 	// 	case 'hi':
@@ -40,7 +40,11 @@ if($method == 'POST'){
 	// }
 
 	$response = new \stdClass();
-	$response->fulfillmentText = $balasan;
+	if (in_array($kata, $welcome)){
+		$response->fulfillmentText = $balasan;
+	}elseif (in_array($kata, $perintah)) {
+		$response->fulfillmentText = $responPerintah;
+	}
 	$response->source = "webhook";
 	echo json_encode($response);
 }
