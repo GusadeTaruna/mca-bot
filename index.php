@@ -2,7 +2,7 @@
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-if($_POST[$method]){
+if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
 
