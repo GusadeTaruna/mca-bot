@@ -10,7 +10,7 @@ if($method == 'POST'){
 
 	switch ($kata) {
 		case 'hi':
-			$agent->reply('Hi, how can I help?');
+			$speech = "awaw";
 			break;
 
 		case 'bye':
@@ -27,9 +27,7 @@ if($method == 'POST'){
 	}
 
 	$response = new \stdClass();
-	$response->speech = $speech;
-	$response->displayText = $speech;
-	$response->text = $speech;
+	$response->fulfillmentText = $speech;
 	$response->source = "webhook";
 	echo json_encode($response);
 }
