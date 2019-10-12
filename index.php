@@ -46,7 +46,7 @@ if($method == 'POST'){
 	}elseif (in_array($kata, $perintah)) {
 		$response->fulfillmentText = $responPerintah;
 	}else{
-		$response->fulfillmentText = "input salah";
+		$response->fulfillmentText = $salah;
 	}
 	$response->source = "webhook";
 	echo json_encode($response);
