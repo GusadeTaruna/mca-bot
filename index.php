@@ -8,11 +8,18 @@ if($method == 'POST'){
 	$json = json_decode($requestBody);
 
 	$kata = $json->queryResult->parameters->kata;
+	$list = $json->queryResult->parameters->list;
 
 	if (in_array($kata, $welcome)) {
     	$balasan = "Selamat datang di Naybot!
     				Ada yang bisa aku bantu ?
     				(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
+	}else{
+		$balasan = "input tidak terdaftar";
+	}
+
+	if (in_array($list, $perintah)) {
+    	$balasan = "ini list perintah" ;
 	}else{
 		$balasan = "input tidak terdaftar";
 	}
