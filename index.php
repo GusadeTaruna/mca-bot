@@ -46,7 +46,7 @@ if($method == 'POST'){
 	}elseif (in_array($kata, $perintah)) {
 		$response->fulfillmentText = $responPerintah;
 	}else{
-		$response->fulfillmentText = $salah;
+		$response->fulfillmentText = print_r($salah[array_rand($salah)]);
 	}
 	$response->source = "webhook";
 	echo json_encode($response);
