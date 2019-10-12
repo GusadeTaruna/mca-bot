@@ -6,7 +6,7 @@ if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
 
-	$kata = $json->result->parameters->kata;
+	$kata = $json->queryResult->parameters->kata;
 
 	switch ($kata) {
 		case 'hi':
