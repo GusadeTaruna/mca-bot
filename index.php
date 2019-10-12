@@ -9,7 +9,7 @@ if($method == 'POST'){
 
 	$kata = $json->queryResult->parameters->kata;
 
-	if (in_array($kata, $welcome)) {
+	if (in_array($kata, $perintah)) {
     	$balasan = "Selamat datang di Naybot!
     				Ada yang bisa aku bantu ?
     				(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
