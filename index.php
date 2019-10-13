@@ -37,10 +37,8 @@ if($method == 'POST'){
 	}
 	//perintah 1
 	if(in_array($kata, $perintah1)){
-		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-		break;
-		if(!empty($kata)){
-			$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
+		// $responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+			$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "KR002"';
 			$hasil = mysqli_query($conn, $sql);
 			if (mysqli_num_rows($result) > 0) {
 			    // output data of each row
