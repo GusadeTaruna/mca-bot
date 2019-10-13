@@ -23,10 +23,8 @@ if($method == 'POST'){
 	$json = json_decode($requestBody);
 
 	//ambil parameter kata dari dialogflow
-	$param1 = $json->queryResult->parameters->kata;
-	$param2 = $json->queryResult->parameters->booking;
-	$kata = strtolower($param1);
-	$pesan = strtolower($param2);
+	$param = $json->queryResult->parameters->kata;
+	$kata = strtolower($param);
 	//Respon untuk percakapan awal
 	if (in_array($kata, $welcome)) {
     	$balasan = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
@@ -93,7 +91,7 @@ if($method == 'POST'){
 		$response->fulfillmentText = $responPerintah;
 	
 	}
-	elseif (in_array($pesan, $perintah1)) {
+	elseif (in_array($param, $perintah1)) {
 		$response->fulfillmentText = $responPerintah1;
 	}
 	else{
