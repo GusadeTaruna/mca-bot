@@ -49,7 +49,7 @@ if($method == 'POST'){
 	}
 
 	if ($intent="karyawan") {
-		$response->fulfillmentText = "waw mau";
+		echo "waw mau";
 	}else{
 		$response->fulfillmentText = ":(";
 	}
