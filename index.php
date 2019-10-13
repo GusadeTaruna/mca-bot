@@ -23,22 +23,30 @@ function processMessage($input) {
         case 'wardinfo':
             $param = $input["queryResult"]["queryText"]["kata"];
             $wardinfo="";
-	        $sql = 'SELECT nama_karyawan FROM tb_karyawan where kode_karyawan = "$param"';
-	        $hasil = mysqli_query($conn, $sql);
-	        if (mysqli_num_rows($result) > 0) {
-	         // output data of each row
-	            while($row = mysqli_fetch_assoc($result)) {
-	                $wardinfo = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
-	                sendMessage(array(
-		                "fulfillmentText" => $wardinfo,
-		            ));      
-	            }
-	        } 
-	        else {
-	            sendMessage(array(
-	                "fulfillmentText" => "Data Tidak Ditemukan",
-	            ));   
-	        }
+            if (!$conn) {
+            	sendMessage(array(
+	                "fulfillmentText" => "Connection failed",
+	            ));     
+			}
+			sendMessage(array(
+	                "fulfillmentText" => "Konek",
+	        ));
+	        // $sql = 'SELECT nama_karyawan FROM tb_karyawan where kode_karyawan = "$param"';
+	        // $hasil = mysqli_query($conn, $sql);
+	        // if (mysqli_num_rows($result) > 0) {
+	        //  // output data of each row
+	        //     while($row = mysqli_fetch_assoc($result)) {
+	        //         $wardinfo = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+	        //         sendMessage(array(
+		       //          "fulfillmentText" => $wardinfo,
+		       //      ));      
+	        //     }
+	        // } 
+	        // else {
+	        //     sendMessage(array(
+	        //         "fulfillmentText" => "Data Tidak Ditemukan",
+	        //     ));   
+	        // }
         default :
             sendMessage(array(
                 "fulfillmentText" => "Error bang",
