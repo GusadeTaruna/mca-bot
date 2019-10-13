@@ -38,7 +38,11 @@ if($method == 'POST'){
 
 	//perintah 1
 	if(in_array($kata, $perintah1)){
-		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+		if (!$conn) {
+		    die("Connection failed: " . mysqli_connect_error());
+		}
+		$responPerintah1 =  "Connected successfully";
+		// $responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 	}
 	
 
