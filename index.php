@@ -21,9 +21,8 @@ function processMessage($input) {
     $action = $input["queryResult"]["action"];
     switch($action){
         case 'wardinfo':
-            $param = $input["queryResult"]["parameters"]["kata"];
+            $param = $input["queryResult"]["queryText"]["kata"];
             $wardinfo="";
-		mysqli_select_db($conn,"db_resource");
 	        $sql = 'SELECT nama_karyawan FROM tb_karyawan where kode_karyawan = "$param"';
 	        $hasil = mysqli_query($conn, $sql);
 	        if (mysqli_num_rows($result) > 0) {
@@ -54,15 +53,9 @@ function sendMessage($parameters) {
     echo $data;
 }
 
-if($method == 'POST'){
-	$input = json_decode(file_get_contents('php://input'), true);
-	if (isset($input["queryResult"]["action"])) {
-	    processMessage($input);
-	}
-}
-else
-{
-	echo "Method not allowed";
+$input = json_decode(file_get_contents('php://input'), true);
+if (isset($input["queryResult"]["action"])) {
+    processMessage($input);
 }
 
 
