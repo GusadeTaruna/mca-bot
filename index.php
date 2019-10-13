@@ -34,25 +34,18 @@ if($method == 'POST'){
 	if (in_array($kata, $welcome)) {
     	$balasan = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
     	$response->fulfillmentText = $balasan;
-	}else{
-		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
-	}
-
-	//Respon untuk lihat perintah
-	if(in_array($kata, $perintah)){
+    }
+    else if(in_array($kata, $perintah)){
 		$responPerintah = "LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
 		$response->fulfillmentText = $responPerintah;
-	}else{
-		$response->fulfillmentText = "Perintah yang anda masukan tidak tersedia, Coba ulangi kembali";
 	}
-
-	//perintah 1
-	if($kata=="booking"){
+	else if($kata=="booking"){
 		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 		$response->fulfillmentText = $responPerintah1;
 
-	}else{
-		$response->fulfillmentText = "Inputan anda tidak dapat dikenali, coba ulangi kembali";
+	}
+	else{
+		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
 	}
 
 	$response->source = "webhook";
