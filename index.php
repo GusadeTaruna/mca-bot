@@ -22,7 +22,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
-
+	$flag = 0;
 	//ambil parameter kata dari dialogflow
 	$param = $json->queryResult->parameters->kata;
 	$kata = strtolower($param);
@@ -77,18 +77,22 @@ if($method == 'POST'){
 	
 	}
 	elseif (in_array($kata, $perintah1)) {
-		$response->fulfillmentText = $responPerintah1;
-	}
-	else if (!empty($kata)) {
-		$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
-		$hasil = mysqli_query($conn, $sql);
-		if (mysqli_num_rows($hasil) > 0) {
-		    // output data of each row
-		    while($row = mysqli_fetch_assoc($hasil)) {
-		    	$response->fulfillmentText = $hasilread = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
-		    }
-		} else {
-		    $hasilread = "Data Karyawan tidak ditemukan";
+		if($flag=1){
+			$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
+			$hasil = mysqli_query($conn, $sql);
+			if (mysqli_num_rows($hasil) > 0) {
+			    // output data of each row
+			    while($row = mysqli_fetch_assoc($hasil)) {
+			    	$response->fulfillmentText = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+			    }
+			} else {
+			    $response->fulfillmentText = "Data Karyawan tidak ditemukan";
+			}
+			$flag=0;
+		}
+		else{
+			$response->fulfillmentText = $responPerintah1;
+			$flag=1;
 		}
 	}
 	else{
