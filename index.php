@@ -4,7 +4,6 @@ include 'koneksi.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 // $state = 0;
-session_start();
 // public function cekKaryawan($kata){
 // 	$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
 // 	$hasil = mysqli_query($conn, $sql);
@@ -18,86 +17,137 @@ session_start();
 // 	}
 // }
 
+function getWardInfo($param){
+    $wardinfo="";
+    $Query="SELECT * FROM tb_karyawan WHERE kode_karyawan=$param";
+    $Result=mysqli_query($conn,$Query);
+    if(isset($Result) && !empty($Result) && mysqli_num_rows($Result) > 0){
+    $row=mysqli_fetch_assoc($Result);
+    $wardinfo= "Halo" . $row["nama_karyawan"];
 
+        $arr=array(
+            "fulfillmentText" => $wardinfo,
+        );
+        sendMessage($arr);
+    }else{
+        $arr=array(
+            "fulfillmentText" => "Gak nemu",
+        );
+        sendMessage($arr);
+    }
+}
+
+function processMessage($input) {
+    $action = $input["queryResult"]["action"];
+    switch($action){
+        case 'wardinfo':
+            $param = $input["queryResult"]["parameters"]["kata"];
+            getWardInfo($param);
+            break;
+        default :
+            sendMessage(array(
+                "fulfillmentText" => "Error bang",
+                "contextOut" => array()
+            ));
+    }
+}
+function sendMessage($parameters) {
+    header('Content-Type: application/json');
+    $data = str_replace('\/','/',json_encode($parameters));
+    echo $data;
+}
 
 if($method == 'POST'){
-	$requestBody = file_get_contents('php://input');
-	$json = json_decode($requestBody);
-
-	//ambil parameter kata dari dialogflow
-	$param = $json->queryResult->parameters->kata;
-	$intent = $json->intent->displayName;
-	$kata = strtolower($param);
-
-	$response = new \stdClass();
-
-	// Respon untuk percakapan awal
-	if (in_array($kata, $welcome)) {
-    	$response->fulfillmentText = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
-    }
-    else if(in_array($kata, $perintah)){
-		$response->fulfillmentText ="LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
+	$input = json_decode(file_get_contents('php://input'), true);
+	if (isset($input["queryResult"]["action"])) {
+	    processMessage($input);
 	}
-	else if(in_array($kata, $perintah1)){
-		$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-
-	}
-	else{
-		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
-	}
-
-	
-
-	$response->source = "webhook";
-	echo json_encode($response);
-	
-
-
-
-
-	// switch ($kata) {
-	// 	case 'hi':
-	// 		$speech = "awaw";
-	// 		break;
-
-	// 	case 'bye':
-	// 		$speech = "dada";
-	// 		break;
-
-	// 	case 'anything':
-	// 		$speech = "ngetik apa kamu";
-	// 		break;
-		
-	// 	default:
-	// 		$speech = "input tidak terdaftar";
-	// 		break;
-	// }
-
-	// $response = new \stdClass();
-	// // if (!$conn) {
- // 	//    $response->fulfillmentText = "failed";
-	// // }
-	// // $response->fulfillmentText = "sukses";
-	// if (in_array($kata, $welcome)){
-	// 	$response->fulfillmentText = $balasan;
-	
-	// }
-	// elseif (in_array($kata, $perintah)) {
-	// 	$response->fulfillmentText = $responPerintah;
-	
-	// }
-	// elseif (in_array($kata, $perintah1)) {
-	// 	$response->fulfillmentText = $responPerintah1;
-	// }
-	// else{
-	// 	$response->fulfillmentText = "Inputanmu tidak dapat dikenali, Silahkan jalankan perintah listperintah untuk melihat perintah yang tersedia";
-	// }
-	// $response->source = "webhook";
-	// echo json_encode($response);
 }
 else
 {
 	echo "Method not allowed";
 }
+
+
+
+// if($method == 'POST'){
+// 	$requestBody = file_get_contents('php://input');
+// 	$json = json_decode($requestBody);
+
+// 	//ambil parameter kata dari dialogflow
+// 	$param = $json->queryResult->parameters->kata;
+// 	$intent = $json->intent->displayName;
+// 	$kata = strtolower($param);
+
+// 	$response = new \stdClass();
+
+// 	// Respon untuk percakapan awal
+// 	if (in_array($kata, $welcome)) {
+//     	$response->fulfillmentText = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
+//     }
+//     else if(in_array($kata, $perintah)){
+// 		$response->fulfillmentText ="LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
+// 	}
+// 	else if(in_array($kata, $perintah1)){
+// 		$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+
+// 	}
+// 	else{
+// 		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
+// 	}
+
+	
+
+// 	$response->source = "webhook";
+// 	echo json_encode($response);
+	
+
+
+
+
+// 	// switch ($kata) {
+// 	// 	case 'hi':
+// 	// 		$speech = "awaw";
+// 	// 		break;
+
+// 	// 	case 'bye':
+// 	// 		$speech = "dada";
+// 	// 		break;
+
+// 	// 	case 'anything':
+// 	// 		$speech = "ngetik apa kamu";
+// 	// 		break;
+		
+// 	// 	default:
+// 	// 		$speech = "input tidak terdaftar";
+// 	// 		break;
+// 	// }
+
+// 	// $response = new \stdClass();
+// 	// // if (!$conn) {
+//  // 	//    $response->fulfillmentText = "failed";
+// 	// // }
+// 	// // $response->fulfillmentText = "sukses";
+// 	// if (in_array($kata, $welcome)){
+// 	// 	$response->fulfillmentText = $balasan;
+	
+// 	// }
+// 	// elseif (in_array($kata, $perintah)) {
+// 	// 	$response->fulfillmentText = $responPerintah;
+	
+// 	// }
+// 	// elseif (in_array($kata, $perintah1)) {
+// 	// 	$response->fulfillmentText = $responPerintah1;
+// 	// }
+// 	// else{
+// 	// 	$response->fulfillmentText = "Inputanmu tidak dapat dikenali, Silahkan jalankan perintah listperintah untuk melihat perintah yang tersedia";
+// 	// }
+// 	// $response->source = "webhook";
+// 	// echo json_encode($response);
+// }
+// else
+// {
+// 	echo "Method not allowed";
+// }
 
 ?>
