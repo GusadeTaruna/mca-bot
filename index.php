@@ -89,11 +89,11 @@ if($method == 'POST'){
 		$response->fulfillmentText = $balasan;
 	
 	}
-	if (in_array($kata, $perintah)) {
+	elseif (in_array($kata, $perintah)) {
 		$response->fulfillmentText = $responPerintah;
 	
 	}
-	if (in_array($pesan, $perintah1)) {
+	elseif (in_array($pesan, $perintah1)) {
 		$response->fulfillmentText = $responPerintah1;
 	}
 	else{
