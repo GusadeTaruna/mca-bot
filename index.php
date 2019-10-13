@@ -37,23 +37,17 @@ if($method == 'POST'){
 	}
 
 	//perintah 1
-	if($kata=="booking")){
-			if($_SESSION['booking']){
-				$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
-				$hasil = mysqli_query($conn, $sql);
-				if (mysqli_num_rows($hasil) > 0) {
-				    // output data of each row
-				    while($row = mysqli_fetch_assoc($hasil)) {
-				    	$responPerintah1 = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
-				    }
-				} else {
-				    $responPerintah1 = "Data Karyawan tidak ditemukan";
-				}
-			}
-			else{
-				$_SESSION['booking'] = TRUE;
-				$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-			}
+	if($kata=="KR002")){
+		$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
+		$hasil = mysqli_query($conn, $sql);
+		if (mysqli_num_rows($hasil) > 0) {
+		    // output data of each row
+		    while($row = mysqli_fetch_assoc($hasil)) {
+		    	$responPerintah1 = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+		    }
+		} else {
+		    $responPerintah1 = "Data Karyawan tidak ditemukan";
+		}
 	}
 	
 
