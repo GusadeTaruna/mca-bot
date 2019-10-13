@@ -41,7 +41,7 @@ if($method == 'POST'){
 
 	$response = new \stdClass();
 	if (!$conn) {
-    	$response->fulfillmentText = "failed";
+    	$response->fulfillmentText = "sukses";
 	}
 	$response->fulfillmentText = "failed";
 	// if (in_array($kata, $welcome)){
