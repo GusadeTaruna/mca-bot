@@ -37,15 +37,13 @@ if($method == 'POST'){
 	}
 
 	//perintah 1
-	// if(in_array($kata, $perintah1)){
-	// 	if($state == 0){
-	// 		$state = $state + 1;
-	// 		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-	// 	}
-	// 	else 
-	// 		$responPerintah1 = "test";
-	// 	}
-	// }
+	if(in_array($kata, $perintah1)){
+			$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+		}
+		else 
+			$responPerintah1 = "test";
+		}
+	}
 
 	// switch ($kata) {
 	// 	case 'hi':
