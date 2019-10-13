@@ -1,6 +1,7 @@
 <?php
 include 'welcome.php';
 include 'koneksi.php';
+session_start();
 $method = $_SERVER['REQUEST_METHOD'];
 // $state = 0;
 
@@ -36,24 +37,8 @@ if($method == 'POST'){
 	}
 
 	//perintah 1
-	// if(in_array($pesan, $perintah1)){
-	// 	if ($conn) {
-	// 		$sql = "SELECT id,nama_karyawan,kode_karyawan FROM tb_karyawan where kode_karyawan='KR002' ";
-	// 		$result = mysqli_query($conn, $sql);
-	// 		if (mysqli_num_rows($result) > 0) {
-	// 		    // output data of each row
-	// 		    while($row = mysqli_fetch_assoc($result)) {
-	// 		        echo "id: " . $row["id"]. " - Name: " . $row["nama_karyawan"].;
-	// 		    }
-	// 		} else {
-	// 		    echo "0 results";
-	// 		}
-
-	// 	}else{
-	// 		$responPerintah1 =  "Connected failed";
-	// 	}
-		
-		// $responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+	if(in_array($kata, $perintah1)){
+		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 	}
 	
 
@@ -91,7 +76,7 @@ if($method == 'POST'){
 		$response->fulfillmentText = $responPerintah;
 	
 	}
-	elseif (in_array($param, $perintah1)) {
+	elseif (in_array($kata, $perintah1)) {
 		$response->fulfillmentText = $responPerintah1;
 	}
 	else{
