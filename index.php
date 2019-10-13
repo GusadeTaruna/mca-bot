@@ -37,7 +37,7 @@ if($method == 'POST'){
 	}
 
 	//perintah 1
-	if(in_array($kata, $perintah1)){
+	if($kata=="booking"){
 		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 	}
 	
