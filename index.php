@@ -39,7 +39,11 @@ if($method == 'POST'){
 	//perintah 1
 	if(in_array($kata, $perintah1)){
 		if ($conn) {
-		    $responPerintah1 =  "Connected successfully";
+			$sql = 'SELECT * FROM tb_karyawan WHERE kode_karyawan="KR002" ';
+			$result = mysqli_query($conn, $sql);
+			$row = mysqli_fetch_assoc($result)
+		    $responPerintah1 =  $row;
+
 		}else{
 			$responPerintah1 =  "Connected failed";
 		}
