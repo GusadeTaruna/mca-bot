@@ -1,6 +1,6 @@
 <?php
 include 'welcome.php';
-require 'testing.php';
+require 'koneksi.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 // $state = 0;
@@ -22,8 +22,23 @@ function processMessage($input) {
     switch($action){
         case 'wardinfo':
             $param = $input["queryResult"]["queryText"]["kata"];
-            getWardInfo($param);
-            break;
+            $wardinfo="";
+	        $sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$param"';
+	        $hasil = mysqli_query($conn, $sql);
+	        if (mysqli_num_rows($result) > 0) {
+	         // output data of each row
+	            while($row = mysqli_fetch_assoc($result)) {
+	                $wardinfo = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+	                sendMessage(array(
+		                "fulfillmentText" => $wardinfo,
+		            ));      
+	            }
+	        } 
+	        else {
+	            sendMessage(array(
+	                "fulfillmentText" => "Data Tidak Ditemukan",
+	            ));   
+	        }
         default :
             sendMessage(array(
                 "fulfillmentText" => "Error bang",
