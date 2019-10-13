@@ -3,6 +3,21 @@ include 'welcome.php';
 include 'koneksi.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
+$state = 0;
+
+public function cekKaryawan($kata){
+	$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
+	$hasil = mysqli_query($conn, $sql);
+	if (mysqli_num_rows($result) > 0) {
+	    // output data of each row
+	    while($row = mysqli_fetch_assoc($result)) {
+	    	$responPerintah1 = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+	    }
+	} else {
+	    $responPerintah1 = "Data Karyawan tidak ditemukan";
+	}
+}
+
 
 if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
@@ -23,16 +38,12 @@ if($method == 'POST'){
 
 	//perintah 1
 	if(in_array($kata, $perintah1)){
-		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-		$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
-		$hasil = mysqli_query($conn, $sql);
-		if (mysqli_num_rows($result) > 0) {
-		    // output data of each row
-		    while($row = mysqli_fetch_assoc($result)) {
-		    	$responPerintah1 = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
-		    }
-		} else {
-		    $responPerintah1 = "Data Karyawan tidak ditemukan";
+		if($state == 0){
+			$state = $state + 1;
+			$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+		}
+		else 
+			$responPerintah1 = "test";
 		}
 	}
 
