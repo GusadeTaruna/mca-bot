@@ -51,13 +51,11 @@ if($method == 'POST'){
 				}
 			}
 			else{
-				$_SESSION['booking'] = true;
-				$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+				$_SESSION['booking'] = 'dhdhdh';
+				$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu , $_SESSION['booking'], $kata";
 			}
 	}
-	else{
-		session_destroy();
-	}
+	
 
 
 
