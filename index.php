@@ -8,8 +8,8 @@ if($method == 'POST'){
 	$json = json_decode($requestBody);
 
 	//ambil parameter kata dari dialogflow
-	$kata = $json->queryResult->parameters->kata;
-
+	$param = $json->queryResult->parameters->kata;
+	$kata = strtolower($param);
 	//Respon untuk percakapan awal
 	if (in_array($kata, $welcome)) {
     	$balasan = "Selamat datang di Naybot!
