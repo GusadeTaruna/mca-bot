@@ -1,7 +1,7 @@
 <?php
 include 'welcome.php';
 include 'koneksi.php';
-session_start();
+
 $method = $_SERVER['REQUEST_METHOD'];
 // $state = 0;
 
@@ -25,6 +25,7 @@ if($method == 'POST'){
 
 	//ambil parameter kata dari dialogflow
 	$param = $json->queryResult->parameters->kata;
+	$karyawan = $json->intent->displayName->karyawan;
 	$kata = strtolower($param);
 	//Respon untuk percakapan awal
 	if (in_array($kata, $welcome)) {
@@ -39,6 +40,11 @@ if($method == 'POST'){
 	//perintah 1
 	if($kata=="booking"){
 		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+		if(!$karyawan){
+			$responPerintah1 = "mau";
+		}else{
+			$responPerintah1 = "gamau";
+		}
 	}
 	
 
