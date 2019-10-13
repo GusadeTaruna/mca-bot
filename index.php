@@ -5,18 +5,18 @@ include 'koneksi.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $state = 0;
 
-public function cekKaryawan($kata){
-	$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
-	$hasil = mysqli_query($conn, $sql);
-	if (mysqli_num_rows($result) > 0) {
-	    // output data of each row
-	    while($row = mysqli_fetch_assoc($result)) {
-	    	$responPerintah1 = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
-	    }
-	} else {
-	    $responPerintah1 = "Data Karyawan tidak ditemukan";
-	}
-}
+// public function cekKaryawan($kata){
+// 	$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
+// 	$hasil = mysqli_query($conn, $sql);
+// 	if (mysqli_num_rows($result) > 0) {
+// 	    // output data of each row
+// 	    while($row = mysqli_fetch_assoc($result)) {
+// 	    	$responPerintah1 = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+// 	    }
+// 	} else {
+// 	    $responPerintah1 = "Data Karyawan tidak ditemukan";
+// 	}
+// }
 
 
 if($method == 'POST'){
