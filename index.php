@@ -48,7 +48,7 @@ if($method == 'POST'){
 	// 	$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
 	// }
 
-	if ($intent->karyawan) {
+	if ($intent="karyawan") {
 		$response->fulfillmentText = "waw mau";
 	}else{
 		$response->fulfillmentText = ":(";
