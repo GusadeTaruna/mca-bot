@@ -12,14 +12,12 @@ if($method == 'POST'){
 	$kata = strtolower($param);
 	//Respon untuk percakapan awal
 	if (in_array($kata, $welcome)) {
-    	$balasan = "Selamat datang di Naybot!
-    				Ada yang bisa aku bantu ?
-    				(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
+    	$balasan = "Selamat datang di Naybot!\nAda yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
 	}
 
 	//Respon untuk lihat perintah
 	if(in_array($kata, $perintah)){
-		$responPerintah = "1. booking (Untuk pesan resource) 2. lihatresource (Untuk melihat ketersediaan resource) ";
+		$responPerintah = "1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource) ";
 	}
 
 	// switch ($kata) {
