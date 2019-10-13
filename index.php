@@ -48,6 +48,12 @@ if($method == 'POST'){
 		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
 	}
 
+	if ($karyawan) {
+		$response->fulfillmentText = "waw";
+	}else{
+		$response->fulfillmentText = "mam"
+	}
+
 	$response->source = "webhook";
 	echo json_encode($response);
 	
