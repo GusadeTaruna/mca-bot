@@ -22,7 +22,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
-	$flag = 0;
+
 	//ambil parameter kata dari dialogflow
 	$param = $json->queryResult->parameters->kata;
 	$kata = strtolower($param);
@@ -77,7 +77,7 @@ if($method == 'POST'){
 	
 	}
 	elseif (in_array($kata, $perintah1)) {
-		if($flag=1){
+		if($_SESSION['booking']){
 			$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
 			$hasil = mysqli_query($conn, $sql);
 			if (mysqli_num_rows($hasil) > 0) {
@@ -88,12 +88,13 @@ if($method == 'POST'){
 			} else {
 			    $response->fulfillmentText = "Data Karyawan tidak ditemukan";
 			}
-			$flag=0;
 		}
 		else{
+			$_SESSION['booking'] = true;
 			$response->fulfillmentText = $responPerintah1;
-			$flag=1;
 		}
+		session_destroy();
+
 	}
 	else{
 		$response->fulfillmentText = "Inputanmu tidak dapat dikenali, Silahkan jalankan perintah listperintah untuk melihat perintah yang tersedia";
