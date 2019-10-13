@@ -18,13 +18,6 @@ session_start();
 // 	}
 // }
 
-public function cekKaryawan($input){
-	if ($intent="karyawan") {
-		$response->fulfillmentText = "waw mau";
-	}else{
-		$response->fulfillmentText = ":(";
-	}
-}
 
 
 if($method == 'POST'){
@@ -33,7 +26,6 @@ if($method == 'POST'){
 
 	//ambil parameter kata dari dialogflow
 	$param = $json->queryResult->parameters->kata;
-	$input = $json->queryResult->queryText;
 	$intent = $json->intent->displayName;
 	$kata = strtolower($param);
 
@@ -41,19 +33,13 @@ if($method == 'POST'){
 
 	// Respon untuk percakapan awal
 	if (in_array($kata, $welcome)) {
-    	$balasan = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
-    	$response->fulfillmentText = $balasan;
+    	$response->fulfillmentText = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
     }
     else if(in_array($kata, $perintah)){
-		$responPerintah = "LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
-		$response->fulfillmentText = $responPerintah;
+		$response->fulfillmentText ="LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
 	}
 	else if(in_array($kata, $perintah1)){
-		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-		$response->fulfillmentText = $responPerintah1;
-		if (isset($input)) {
-			cekKaryawan($input);
-		}
+		$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 
 	}
 	else{
