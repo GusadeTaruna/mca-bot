@@ -1,5 +1,6 @@
 <?php
 include 'welcome.php';
+include 'koneksi.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -11,14 +12,14 @@ if($method == 'POST'){
 	$param = $json->queryResult->parameters->kata;
 	$kata = strtolower($param);
 	//Respon untuk percakapan awal
-	if (in_array($kata, $welcome)) {
-    	$balasan = "Selamat datang di Naybot!\nAda yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
-	}
+	// if (in_array($kata, $welcome)) {
+ //    	$balasan = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
+	// }
 
-	//Respon untuk lihat perintah
-	if(in_array($kata, $perintah)){
-		$responPerintah = "1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource) ";
-	}
+	// //Respon untuk lihat perintah
+	// if(in_array($kata, $perintah)){
+	// 	$responPerintah = "LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
+	// }
 
 	// switch ($kata) {
 	// 	case 'hi':
@@ -39,15 +40,19 @@ if($method == 'POST'){
 	// }
 
 	$response = new \stdClass();
-	if (in_array($kata, $welcome)){
-		$response->fulfillmentText = $balasan;
-	
-	}elseif (in_array($kata, $perintah)) {
-		$response->fulfillmentText = $responPerintah;
-	
-	}else{
-		$response->fulfillmentText = "Inputanmu tidak dapat dikenali, Silahkan jalankan perintah listperintah untuk melihat perintah yang tersedia";
+	if (!$conn) {
+    	$response->fulfillmentText = "failed";
 	}
+	$response->fulfillmentText = "failed";
+	// if (in_array($kata, $welcome)){
+	// 	$response->fulfillmentText = $balasan;
+	
+	// }elseif (in_array($kata, $perintah)) {
+	// 	$response->fulfillmentText = $responPerintah;
+	
+	// }else{
+	// 	$response->fulfillmentText = "Inputanmu tidak dapat dikenali, Silahkan jalankan perintah listperintah untuk melihat perintah yang tersedia";
+	// }
 	$response->source = "webhook";
 	echo json_encode($response);
 }
