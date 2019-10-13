@@ -4,7 +4,7 @@ include 'koneksi.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 // $state = 0;
-
+session_start();
 // public function cekKaryawan($kata){
 // 	$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
 // 	$hasil = mysqli_query($conn, $sql);
@@ -18,6 +18,14 @@ $method = $_SERVER['REQUEST_METHOD'];
 // 	}
 // }
 
+public function cekKaryawan($input){
+	if ($intent="karyawan") {
+		$response->fulfillmentText = "waw mau";
+	}else{
+		$response->fulfillmentText = ":(";
+	}
+}
+
 
 if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
@@ -25,6 +33,7 @@ if($method == 'POST'){
 
 	//ambil parameter kata dari dialogflow
 	$param = $json->queryResult->parameters->kata;
+	$input = $json->queryResult->queryText;
 	$intent = $json->intent->displayName;
 	$kata = strtolower($param);
 
@@ -42,17 +51,16 @@ if($method == 'POST'){
 	else if(in_array($kata, $perintah1)){
 		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 		$response->fulfillmentText = $responPerintah1;
+		if (isset($input)) {
+			cekKaryawan($input);
+		}
 
 	}
 	else{
 		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
 	}
 
-	if ($intent="karyawan") {
-		echo "waw mau";
-	}else{
-		$response->fulfillmentText = ":(";
-	}
+	
 
 	$response->source = "webhook";
 	echo json_encode($response);
