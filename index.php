@@ -23,7 +23,7 @@ function processMessage($input) {
         case 'wardinfo':
             $param = $input["queryResult"]["queryText"]["kata"];
             $wardinfo="";
-	        $sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$param"';
+	        $sql = 'SELECT nama_karyawan FROM tb_karyawan where kode_karyawan = "$param"';
 	        $hasil = mysqli_query($conn, $sql);
 	        if (mysqli_num_rows($result) > 0) {
 	         // output data of each row
