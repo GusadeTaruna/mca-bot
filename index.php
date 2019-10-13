@@ -37,7 +37,7 @@ if($method == 'POST'){
 	}
 
 	//perintah 1
-	if($kata="booking")){
+	if($kata=="booking")){
 			if($_SESSION['booking']){
 				$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
 				$hasil = mysqli_query($conn, $sql);
