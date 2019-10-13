@@ -21,7 +21,7 @@ function processMessage($input) {
     $action = $input["queryResult"]["action"];
     switch($action){
         case 'wardinfo':
-            $param = $input["queryResult"]["queryText"]["kata"];
+            $param = $input["queryResult"]["parameters"]["kata"];
             $wardinfo="";
 		mysqli_select_db($conn,"db_resource");
 	        $sql = 'SELECT nama_karyawan FROM tb_karyawan where kode_karyawan = "$param"';
