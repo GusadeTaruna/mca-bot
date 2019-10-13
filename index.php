@@ -25,33 +25,33 @@ if($method == 'POST'){
 
 	//ambil parameter kata dari dialogflow
 	$param = $json->queryResult->parameters->kata;
-	$karyawan = $json->intent->displayName->karyawan;
+	$intent = $json->intent->displayName;
 	$kata = strtolower($param);
 
 	$response = new \stdClass();
 
 	//Respon untuk percakapan awal
-	if (in_array($kata, $welcome)) {
-    	$balasan = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
-    	$response->fulfillmentText = $balasan;
-    }
-    else if(in_array($kata, $perintah)){
-		$responPerintah = "LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
-		$response->fulfillmentText = $responPerintah;
-	}
-	else if(in_array($kata, $perintah1)){
-		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-		$response->fulfillmentText = $responPerintah1;
+	// if (in_array($kata, $welcome)) {
+ //    	$balasan = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
+ //    	$response->fulfillmentText = $balasan;
+ //    }
+ //    else if(in_array($kata, $perintah)){
+	// 	$responPerintah = "LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
+	// 	$response->fulfillmentText = $responPerintah;
+	// }
+	// else if(in_array($kata, $perintah1)){
+	// 	$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+	// 	$response->fulfillmentText = $responPerintah1;
 
-	}
-	else{
-		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
-	}
+	// }
+	// else{
+	// 	$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
+	// }
 
-	if ($karyawan) {
-		$response->fulfillmentText = "waw";
+	if ($intent=="karyawan") {
+		$response->fulfillmentText = "waw mau";
 	}else{
-		$response->fulfillmentText = "mam"
+		$response->fulfillmentText = ":(";
 	}
 
 	$response->source = "webhook";
