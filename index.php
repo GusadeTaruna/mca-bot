@@ -39,7 +39,7 @@ if($method == 'POST'){
 		$responPerintah = "LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
 		$response->fulfillmentText = $responPerintah;
 	}
-	else if($kata=="booking"){
+	else if(in_array($kata, $perintah1){
 		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 		$response->fulfillmentText = $responPerintah1;
 
