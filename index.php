@@ -1,7 +1,6 @@
 <?php
 include 'welcome.php';
 include 'koneksi.php';
-session_start();
 $method = $_SERVER['REQUEST_METHOD'];
 // $state = 0;
 
