@@ -41,7 +41,7 @@ if($method == 'POST'){
 	if($kata=="booking"){
 		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 	}
-	if(!$karyawan){
+	if($karyawan){
 			$responPerintah1 = "mau";
 		}else{
 			$responPerintah1 = "gamau";
