@@ -39,10 +39,17 @@ if($method == 'POST'){
 	//perintah 1
 	if(in_array($kata, $perintah1)){
 		if ($conn) {
-			$sql = 'SELECT * FROM tb_karyawan WHERE kode_karyawan="KR002" ';
+			$sql = "SELECT id,nama_karyawan,kode_karyawan FROM tb_karyawan where kode_karyawan='KR002' ";
 			$result = mysqli_query($conn, $sql);
-			$row = mysqli_fetch_assoc($result)
-		    $responPerintah1 =  $row;
+
+			if (mysqli_num_rows($result) > 0) {
+			    // output data of each row
+			    while($row = mysqli_fetch_assoc($result)) {
+			        echo "id: " . $row["id"]. " - Name: " . $row["nama_karyawan"].;
+			    }
+			} else {
+			    echo "0 results";
+			}
 
 		}else{
 			$responPerintah1 =  "Connected failed";
