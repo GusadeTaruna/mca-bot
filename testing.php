@@ -7,8 +7,9 @@
         if(isset($Result) && !empty($Result) && pg_num_rows($Result) > 0){
             $row=pg_fetch_assoc($Result);
             $wardinfo= "Halo" . $row["nama_karyawan"];
-            $arr=$response->fulfillmentText => $wardinfo,
-            sendMessage($arr);
+            $arr=array(
+                "fulfillmentText" => $wardinfo,
+            );
         }else{
             $arr=array(
                 "fulfillmentText" => "Gak nemu",

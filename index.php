@@ -31,6 +31,7 @@ function processMessage($input) {
             ));
     }
 }
+
 function sendMessage($parameters) {
     header('Content-Type: application/json');
     $data = str_replace('\/','/',json_encode($parameters));
