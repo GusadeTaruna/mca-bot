@@ -1,7 +1,7 @@
 <?php
 include 'welcome.php';
 include 'koneksi.php';
-
+session_start();
 $method = $_SERVER['REQUEST_METHOD'];
 // $state = 0;
 
@@ -38,8 +38,29 @@ if($method == 'POST'){
 
 	//perintah 1
 	if(in_array($kata, $perintah1)){
-			$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+			if($_SESSION['booking']){
+				$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
+				$hasil = mysqli_query($conn, $sql);
+				if (mysqli_num_rows($hasil) > 0) {
+				    // output data of each row
+				    while($row = mysqli_fetch_assoc($hasil)) {
+				    	$responPerintah1 = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+				    }
+				} else {
+				    $responPerintah1 = "Data Karyawan tidak ditemukan";
+				}
+			}
+			else{
+				$_SESSION['booking'] = true;
+				$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+			}
 	}
+	else{
+		session_destroy();
+	}
+
+
+
 
 	// switch ($kata) {
 	// 	case 'hi':
