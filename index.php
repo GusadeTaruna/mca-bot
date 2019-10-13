@@ -35,23 +35,24 @@ if($method == 'POST'){
 	if(in_array($kata, $perintah)){
 		$responPerintah = "LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
 	}
-
 	//perintah 1
 	if(in_array($kata, $perintah1)){
 		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-	}
-	if(!empty($kata)){
-		$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
-		$hasil = mysqli_query($conn, $sql);
-		if (mysqli_num_rows($hasil) > 0) {
-		    // output data of each row
-		    while($row = mysqli_fetch_assoc($hasil)) {
-		    	$responPerintah1 = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
-		    }
-		} else {
-		    $responPerintah1 = "Data Karyawan tidak ditemukan";
+		break;
+		if(!empty($kata)){
+			$sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
+			$hasil = mysqli_query($conn, $sql);
+			if (mysqli_num_rows($result) > 0) {
+			    // output data of each row
+			    while($row = mysqli_fetch_assoc($result)) {
+			    	$responPerintah1 = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+			    }
+			} else {
+			    $responPerintah1 = "Data Karyawan tidak ditemukan";
+			}
 		}
 	}
+
 	
 
 
