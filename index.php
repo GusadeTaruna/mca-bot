@@ -24,8 +24,10 @@ if($method == 'POST'){
 	$json = json_decode($requestBody);
 
 	//ambil parameter kata dari dialogflow
-	$param = $json->queryResult->parameters->kata;
-	$kata = strtolower($param);
+	$param1 = $json->queryResult->parameters->kata;
+	$param2 = $json->queryResult->parameters->booking;
+	$kata = strtolower($param1);
+	$pesan = strtolower($param2);
 	//Respon untuk percakapan awal
 	if (in_array($kata, $welcome)) {
     	$balasan = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
@@ -37,11 +39,10 @@ if($method == 'POST'){
 	}
 
 	//perintah 1
-	if(in_array($kata, $perintah1)){
+	if(in_array($pesan, $perintah1)){
 		if ($conn) {
 			$sql = "SELECT id,nama_karyawan,kode_karyawan FROM tb_karyawan where kode_karyawan='KR002' ";
 			$result = mysqli_query($conn, $sql);
-
 			if (mysqli_num_rows($result) > 0) {
 			    // output data of each row
 			    while($row = mysqli_fetch_assoc($result)) {
@@ -93,7 +94,7 @@ if($method == 'POST'){
 		$response->fulfillmentText = $responPerintah;
 	
 	}
-	elseif (in_array($kata, $perintah1)) {
+	elseif (in_array($pesan, $perintah1)) {
 		$response->fulfillmentText = $responPerintah1;
 	}
 	else{
