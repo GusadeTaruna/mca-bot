@@ -27,25 +27,36 @@ if($method == 'POST'){
 	$param = $json->queryResult->parameters->kata;
 	$karyawan = $json->intent->displayName->karyawan;
 	$kata = strtolower($param);
+
+	$response = new \stdClass();
+
 	//Respon untuk percakapan awal
 	if (in_array($kata, $welcome)) {
     	$balasan = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
+    	$response->fulfillmentText = $balasan;
+	}else{
+		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
 	}
 
 	//Respon untuk lihat perintah
 	if(in_array($kata, $perintah)){
 		$responPerintah = "LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
+		$response->fulfillmentText = $responPerintah;
+	}else{
+		$response->fulfillmentText = "Perintah yang anda masukan tidak tersedia, Coba ulangi kembali";
 	}
 
 	//perintah 1
 	if($kata=="booking"){
 		$responPerintah1 = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+		$response->fulfillmentText = $responPerintah1;
+
+	}else{
+		$response->fulfillmentText = "Inputan anda tidak dapat dikenali, coba ulangi kembali";
 	}
-	if($karyawan){
-			$responPerintah1 = "mau";
-		}else{
-			$responPerintah1 = "gamau";
-	}
+
+	$response->source = "webhook";
+	echo json_encode($response);
 	
 
 
@@ -69,27 +80,27 @@ if($method == 'POST'){
 	// 		break;
 	// }
 
-	$response = new \stdClass();
-	// if (!$conn) {
- 	//    $response->fulfillmentText = "failed";
+	// $response = new \stdClass();
+	// // if (!$conn) {
+ // 	//    $response->fulfillmentText = "failed";
+	// // }
+	// // $response->fulfillmentText = "sukses";
+	// if (in_array($kata, $welcome)){
+	// 	$response->fulfillmentText = $balasan;
+	
 	// }
-	// $response->fulfillmentText = "sukses";
-	if (in_array($kata, $welcome)){
-		$response->fulfillmentText = $balasan;
+	// elseif (in_array($kata, $perintah)) {
+	// 	$response->fulfillmentText = $responPerintah;
 	
-	}
-	elseif (in_array($kata, $perintah)) {
-		$response->fulfillmentText = $responPerintah;
-	
-	}
-	elseif (in_array($kata, $perintah1)) {
-		$response->fulfillmentText = $responPerintah1;
-	}
-	else{
-		$response->fulfillmentText = "Inputanmu tidak dapat dikenali, Silahkan jalankan perintah listperintah untuk melihat perintah yang tersedia";
-	}
-	$response->source = "webhook";
-	echo json_encode($response);
+	// }
+	// elseif (in_array($kata, $perintah1)) {
+	// 	$response->fulfillmentText = $responPerintah1;
+	// }
+	// else{
+	// 	$response->fulfillmentText = "Inputanmu tidak dapat dikenali, Silahkan jalankan perintah listperintah untuk melihat perintah yang tersedia";
+	// }
+	// $response->source = "webhook";
+	// echo json_encode($response);
 }
 else
 {
