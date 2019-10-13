@@ -21,7 +21,7 @@ function processMessage($input) {
     $action = $input["queryResult"]["action"];
     switch($action){
         case 'wardinfo':
-            $param = $input["queryResult"]["queryText"];
+            $param = $input["queryResult"]["queryText"]["kata"];
             getWardInfo($param);
             break;
         default :
