@@ -89,7 +89,7 @@ if($method == 'POST'){
 	// }
 	// else if(in_array($kata, $perintah1)){
 		if ($flag==1) {
-		        $sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
+		        $sql = "SELECT * FROM tb_karyawan where kode_karyawan = '$kata'";
 		        $hasil = mysqli_query($conn, $sql);
 		        if (mysqli_num_rows($result) > 0) {
 		         // output data of each row
