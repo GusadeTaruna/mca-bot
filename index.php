@@ -91,13 +91,14 @@ if($method == 'POST'){
 		//if ($flag==1) {
 	if (in_array($kata, $welcome)) {
 		mysql_select_db('db_resource', $conn);
-		        $sql = "SELECT * FROM tb_karyawan";
+		        $sql = "SELECT * FROM tb_karyawan where kode_karyawan = 'KR001'";
 		        $hasil = mysqli_query($conn, $sql);
 		        if (mysqli_num_rows($result) > 0) {
 		         // output data of each row
 		            while($row = mysqli_fetch_assoc($result)) {
-		                 $response->fulfillmentText = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+		                  $wardinfo = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
 		            }
+				$response->fulfillmentText = $wardinfo;
 		        } 
 		        else {
 		            $response->fulfillmentText ="Data tidak ditemukan";
