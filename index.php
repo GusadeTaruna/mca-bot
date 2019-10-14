@@ -71,7 +71,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
-	$flag = 0;
+	$flag = 1;
 	$wardinfo="";
 	//ambil parameter kata dari dialogflow
 	$param = $json->queryResult->parameters->kata;
