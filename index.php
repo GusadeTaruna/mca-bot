@@ -94,6 +94,7 @@ if($method == 'POST'){
 		        $sql = "SELECT * FROM tb_karyawan where kode_karyawan = 'KR001'";
 		        $hasil = mysqli_query($conn, $sql);
 		        if (mysqli_num_rows($hasil) > 0) {
+			$row=mysqli_fetch_assoc($hasil);
 		         // output data of each row
 			    $response->fulfillmentText = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
 		        } 
