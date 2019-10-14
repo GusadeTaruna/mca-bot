@@ -89,7 +89,8 @@ if($method == 'POST'){
 	// }
 	// else if(in_array($kata, $perintah1)){
 		//if ($flag==1) {
-		        $sql = "SELECT * FROM tb_karyawan where kode_karyawan = '$kata'";
+	if (in_array($kata, $welcome)) {
+		        $sql = "SELECT * FROM tb_karyawan where kode_karyawan = 'KR001'";
 		        $hasil = mysqli_query($conn, $sql);
 		        if (mysqli_num_rows($result) > 0) {
 		         // output data of each row
@@ -101,10 +102,10 @@ if($method == 'POST'){
 		        else {
 		            $response->fulfillmentText ="Data tidak ditemukan";
 		        }
-		//}else{
+		}else{
 		//	$flag=1;
-		//	$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-		//}
+			$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+		}
 		
 		// $action = $json->queryResult->action;
 		// switch ($action) {
