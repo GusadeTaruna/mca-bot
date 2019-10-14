@@ -95,9 +95,8 @@ if($method == 'POST'){
 		        if (mysqli_num_rows($result) > 0) {
 		         // output data of each row
 		            while($row = mysqli_fetch_assoc($result)) {
-		                $wardinfo = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+		                 $response->fulfillmentText = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
 		            }
-		            $response->fulfillmentText = $wardinfo;
 		        } 
 		        else {
 		            $response->fulfillmentText ="Data tidak ditemukan";
