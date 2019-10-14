@@ -102,7 +102,7 @@ if($method == 'POST'){
 		            $response->fulfillmentText ="Data tidak ditemukan", 
 		        }
 		}else{
-			$flag==1
+			$flag=1;
 			$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 		}
 		
