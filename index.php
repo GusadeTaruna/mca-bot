@@ -90,6 +90,7 @@ if($method == 'POST'){
 	// else if(in_array($kata, $perintah1)){
 		//if ($flag==1) {
 	if (in_array($kata, $welcome)) {
+		mysql_select_db('db_resource', $conn);
 		        $sql = "SELECT * FROM tb_karyawan";
 		        $hasil = mysqli_query($conn, $sql);
 		        if (mysqli_num_rows($result) > 0) {
