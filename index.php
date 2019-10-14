@@ -71,7 +71,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
-
+	$flag = 0;
 	//ambil parameter kata dari dialogflow
 	$param = $json->queryResult->parameters->kata;
 	$intent = $json->intent->displayName;
@@ -87,20 +87,39 @@ if($method == 'POST'){
 		$response->fulfillmentText ="LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
 	}
 	else if(in_array($kata, $perintah1)){
-		$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-		$action = $json->queryResult->action;
-		switch ($action) {
-			case 'wardinfo':
-				if (!$conn) {
-					$response->fulfillmentText ="koneksi fail";   
-				}
-					$response->fulfillmentText ="berhasil";   
-				break;
-			
-			default:
-				$response->fulfillmentText ="error";  
-				break;
+		if ($flag==1) {
+			$wardinfo="";
+		        $sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
+		        $hasil = mysqli_query($conn, $sql);
+		        if (mysqli_num_rows($result) > 0) {
+		         // output data of each row
+		            while($row = mysqli_fetch_assoc($result)) {
+		                $wardinfo = "Halo" . $row["nama_karyawan"]. " anda mau booking apa ?";
+		                    $response->fulfillmentText = $wardinfo, 
+		            }
+		        } 
+		        else {
+		            $response->fulfillmentText ="Data tidak ditemukan", 
+		        }
+		}else{
+			$flag==1
+			$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
 		}
+		
+		// $action = $json->queryResult->action;
+		// switch ($action) {
+		// 	case 'wardinfo':
+		// 		if (!$conn) {
+		// 			$response->fulfillmentText ="koneksi fail";   
+		// 		}
+		// 			$response->fulfillmentText ="berhasil";   
+		// 		break;
+			
+		// 	default:
+		// 		$response->fulfillmentText ="error";  
+		// 		break;
+		// }
+
 	}
 	else{
 		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
