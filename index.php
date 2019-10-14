@@ -81,12 +81,14 @@ if($method == 'POST'){
 	$response = new \stdClass();
 
 	// Respon untuk percakapan awal
-	if (in_array($kata, $welcome)) {
-    	$response->fulfillmentText = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
-    }
-    else if(in_array($kata, $perintah)){
-		$response->fulfillmentText ="LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
-	}else if ($flag==1) {
+	// if (in_array($kata, $welcome)) {
+ //    	$response->fulfillmentText = "Selamat datang di Naybot!, Ada yang bisa aku bantu ?\n(Jalankan perintah listperintah untuk melihat perintah yang tersedia)" ;
+ //    }
+ //    else if(in_array($kata, $perintah)){
+	// 	$response->fulfillmentText ="LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
+	// }
+	// else if(in_array($kata, $perintah1)){
+		if ($flag==1) {
 		        $sql = 'SELECT * FROM tb_karyawan where kode_karyawan = "$kata"';
 		        $hasil = mysqli_query($conn, $sql);
 		        if (mysqli_num_rows($result) > 0) {
@@ -118,10 +120,10 @@ if($method == 'POST'){
 		// 		break;
 		// }
 
-	}
-	else{
-		$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
-	}
+	// }
+	// else{
+	// 	$response->fulfillmentText = "Saya tidak mengerti dengan maksudmu\ncoba jalankan perintah listperintah untuk melihat perintah yang tersedia";
+	// }
 
 	
 
