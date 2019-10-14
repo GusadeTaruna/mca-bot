@@ -71,7 +71,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
-	$flag = 1;
+//	$flag = 1;
 	$wardinfo="";
 	//ambil parameter kata dari dialogflow
 	$param = $json->queryResult->parameters->kata;
@@ -88,7 +88,7 @@ if($method == 'POST'){
 	// 	$response->fulfillmentText ="LIST PERINTAH YANG TERSEDIA\n1. booking (Untuk pesan resource)\n2. lihatresource (Untuk melihat ketersediaan resource)\n3. lihatdatapinjam (Untuk melihat data peminjaman resource)";
 	// }
 	// else if(in_array($kata, $perintah1)){
-		if ($flag==1) {
+		//if ($flag==1) {
 		        $sql = "SELECT * FROM tb_karyawan where kode_karyawan = '$kata'";
 		        $hasil = mysqli_query($conn, $sql);
 		        if (mysqli_num_rows($result) > 0) {
@@ -101,10 +101,10 @@ if($method == 'POST'){
 		        else {
 		            $response->fulfillmentText ="Data tidak ditemukan";
 		        }
-		}else{
-			$flag=1;
-			$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
-		}
+		//}else{
+		//	$flag=1;
+		//	$response->fulfillmentText = "Untuk booking resource, anda perlu menginput Kode Karyawan terlebih dahulu";
+		//}
 		
 		// $action = $json->queryResult->action;
 		// switch ($action) {
